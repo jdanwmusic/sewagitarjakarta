@@ -1,6 +1,6 @@
-# SEWAGITAR.COM — Website Rental Gitar
+# SEWA GITAR JAKARTA — Website Rental Gitar
 
-Website resmi SEWAGITAR.COM dibangun dengan **Astro** (static site, JS minimal),
+Website resmi SEWA GITAR JAKARTA dibangun dengan **Astro** (static site, JS minimal),
 untuk penyewaan gitar elektrik, akustik, dan bass area Jakarta & Tangerang.
 
 ## Menjalankan Project

@@ -3,7 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import ProductCard from "../../components/ProductCard.astro";
 import { guitars, categories } from "../../data/guitars";
 
-const title = "Katalog Gitar Sewa — Elektrik, Akustik & Bass | SEWAGITAR.COM";
+const title = "Katalog Gitar Sewa — Elektrik, Akustik & Bass | SEWA GITAR JAKARTA";
 const description =
   "Jelajahi katalog lengkap gitar elektrik, akustik, dan bass yang siap disewa untuk area Jakarta dan Tangerang. Harga flat Rp100.000/24 jam.";
 
@@ -16,7 +16,7 @@ const itemListSchema = {
   itemListElement: guitars.map((g, i) => ({
     "@type": "ListItem",
     position: i + 1,
-    url: `https://sewagitar.com/gitar/${g.slug}`,
+    url: `https://sewagitarjakarta.jdanwmusic.workers.dev/gitar/${g.slug}`,
     name: g.name,
   })),
 };

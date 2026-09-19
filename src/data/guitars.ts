@@ -1,5 +1,5 @@
 // =====================================================================
-// DATA GITAR — SEWAGITAR.COM
+// DATA GITAR — SEWA GITAR JAKARTA
 // =====================================================================
 // Ini adalah SATU-SATUNYA file yang perlu Anda edit untuk:
 //  - Menambah gitar baru
@@ -56,7 +56,7 @@ export function waLink(message: string): string {
 /** Link WhatsApp khusus untuk menanyakan ketersediaan sebuah gitar */
 export function waLinkForGuitar(guitar: Guitar): string {
   return waLink(
-    `Halo SEWAGITAR.COM, saya ingin menyewa ${guitar.name}. Apakah unit tersedia?`
+    `Halo SEWA GITAR JAKARTA, saya ingin menyewa ${guitar.name}. Apakah unit tersedia?`
   );
 }
 

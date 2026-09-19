@@ -1,5 +1,5 @@
 // =====================================================================
-// KONFIGURASI UMUM SITUS — SEWAGITAR.COM
+// KONFIGURASI UMUM SITUS — SEWA GITAR JAKARTA
 // =====================================================================
 // Edit file ini untuk mengubah info kontak, alamat, atau paket harga.
 // =====================================================================
@@ -7,9 +7,9 @@
 import { waLink } from "./guitars";
 
 export const siteConfig = {
-  name: "SEWAGITAR.COM",
-  domain: "sewagitar.com",
-  url: "https://sewagitar.com",
+  name: "SEWA GITAR JAKARTA",
+  domain: "sewagitarjakarta.jdanwmusic.workers.dev",
+  url: "https://sewagitarjakarta.jdanwmusic.workers.dev",
   phoneDisplay: "0877-4851-4337",
   email: "jdanwmusic@gmail.com",
   address: {
@@ -24,12 +24,12 @@ export const siteConfig = {
   serviceArea: "Jakarta & Tangerang",
 };
 
-export const waGeneral = waLink("Halo SEWAGITAR.COM, saya ingin menyewa gitar.");
+export const waGeneral = waLink("Halo SEWA GITAR JAKARTA, saya ingin menyewa gitar.");
 export const waArea = waLink(
-  "Halo SEWAGITAR.COM, saya tanya layanan area Jakarta Tangerang."
+  "Halo SEWA GITAR JAKARTA, saya tanya layanan area Jakarta Tangerang."
 );
 export const waFinal = waLink(
-  "Halo SEWAGITAR.COM, saya butuh gitar untuk disewa."
+  "Halo SEWA GITAR JAKARTA, saya butuh gitar untuk disewa."
 );
 
 export interface PricingPlan {
@@ -56,7 +56,7 @@ export const pricingPlans: PricingPlan[] = [
     ],
     ctaLabel: "Pilih Paket 24 JAM",
     waUrl: waLink(
-      "Halo SEWAGITAR.COM, saya ingin sewa paket 24 Jam (Rp100.000)."
+      "Halo SEWA GITAR JAKARTA, saya ingin sewa paket 24 Jam (Rp100.000)."
     ),
   },
   {
@@ -72,7 +72,7 @@ export const pricingPlans: PricingPlan[] = [
     ],
     ctaLabel: "Pilih Paket 1 MINGGU",
     waUrl: waLink(
-      "Halo SEWAGITAR.COM, saya ingin sewa paket 1 Minggu (Rp300.000)."
+      "Halo SEWA GITAR JAKARTA, saya ingin sewa paket 1 Minggu (Rp300.000)."
     ),
   },
   {
@@ -88,7 +88,7 @@ export const pricingPlans: PricingPlan[] = [
     ],
     ctaLabel: "Pilih Paket 1 BULAN",
     waUrl: waLink(
-      "Halo SEWAGITAR.COM, saya ingin sewa paket 1 Bulan (Rp1.000.000)."
+      "Halo SEWA GITAR JAKARTA, saya ingin sewa paket 1 Bulan (Rp1.000.000)."
     ),
   },
 ];
