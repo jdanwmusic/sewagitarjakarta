@@ -1,0 +1,337 @@
+/* =====================================================================
+   SEWAGITAR.COM — GLOBAL STYLES
+   Design language: rosewood + brass, warm off-white paper, strong
+   serif display type paired with a clean grotesque for body/UI.
+   ===================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap");
+
+:root {
+  /* --- color tokens --- */
+  --color-paper: #f8f5ef;
+  --color-paper-dim: #f1ece2;
+  --color-ink: #1b1712;
+  --color-ink-soft: #4a4238;
+  --color-line: #e2dace;
+  --color-line-strong: #d3c8b6;
+
+  --color-rosewood: #6f3324;
+  --color-rosewood-dark: #501f16;
+  --color-rosewood-tint: #f4e6df;
+
+  --color-brass: #a9812f;
+  --color-brass-light: #c9a24d;
+  --color-brass-tint: #f4ecd9;
+
+  --color-whatsapp: #22b559;
+  --color-whatsapp-dark: #1a9448;
+
+  --color-card: #ffffff;
+
+  /* --- type tokens --- */
+  --font-display: "Fraunces", "Iowan Old Style", "Georgia", serif;
+  --font-body: "Manrope", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  /* --- shape / elevation --- */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --shadow-sm: 0 1px 2px rgba(27, 23, 18, 0.06);
+  --shadow-md: 0 8px 24px -8px rgba(27, 23, 18, 0.16);
+  --shadow-lg: 0 20px 48px -16px rgba(27, 23, 18, 0.22);
+
+  /* --- layout --- */
+  --content-max: 1180px;
+  --space-section: clamp(3.5rem, 7vw, 7rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.08;
+  margin: 0;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+}
+
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-rosewood);
+  outline-offset: 3px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.section {
+  padding-block: var(--space-section);
+}
+
+.section--tight {
+  padding-block: clamp(2rem, 4vw, 3.5rem);
+}
+
+.section--muted {
+  background: var(--color-paper-dim);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-rosewood);
+  font-weight: 600;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-brass);
+  flex-shrink: 0;
+}
+
+.section-head {
+  max-width: 640px;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.section-head h2 {
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  margin-top: 0.6rem;
+}
+
+.section-head p {
+  margin-top: 0.9rem;
+  color: var(--color-ink-soft);
+  font-size: 1.05rem;
+}
+
+.section-head--center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+/* --- buttons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.98rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: var(--color-rosewood);
+  color: #fff8f2;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  background: var(--color-rosewood-dark);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-whatsapp {
+  background: var(--color-whatsapp);
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-whatsapp:hover {
+  background: var(--color-whatsapp-dark);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-ink);
+  border-color: var(--color-line-strong);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-ink);
+  background: var(--color-paper-dim);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn svg {
+  width: 1.1em;
+  height: 1.1em;
+  flex-shrink: 0;
+}
+
+/* --- badges / tags --- */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: var(--color-brass-tint);
+  color: var(--color-rosewood-dark);
+  border: 1px solid var(--color-line-strong);
+}
+
+.badge-hemat {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: var(--color-rosewood);
+  color: #fff8f2;
+}
+
+.status-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status-dot::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-whatsapp);
+}
+
+.status-dot.is-unavailable::before {
+  background: #b4483a;
+}
+
+/* --- skip link --- */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--color-ink);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 0 8px 0;
+  z-index: 200;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+/* --- utility --- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.text-muted {
+  color: var(--color-ink-soft);
+}
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--color-ink-soft);
+}
+
+.breadcrumb a:hover {
+  color: var(--color-rosewood);
+}
+
+.breadcrumb .sep {
+  opacity: 0.5;
+}

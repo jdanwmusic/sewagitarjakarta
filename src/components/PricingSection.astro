@@ -1,0 +1,37 @@
+---
+import { pricingPlans } from "../data/site";
+import PricingCard from "./PricingCard.astro";
+---
+
+<section class="pricing section--muted">
+  <div class="container">
+    <div class="section-head section-head--center">
+      <p class="eyebrow">Tarif Sewa</p>
+      <h2>Harga Sewa</h2>
+      <p>Tarif flat untuk seluruh kategori. Elektrik · Akustik · Bass.</p>
+    </div>
+
+    <div class="pricing__grid">
+      {pricingPlans.map((plan) => (
+        <PricingCard plan={plan} featured={plan.id === "mingguan"} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pricing__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  @media (max-width: 860px) {
+    .pricing__grid {
+      grid-template-columns: 1fr;
+      max-width: 420px;
+      margin-inline: auto;
+    }
+  }
+</style>

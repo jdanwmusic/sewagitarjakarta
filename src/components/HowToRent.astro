@@ -1,0 +1,94 @@
+---
+import { howToSteps } from "../data/site";
+
+interface Props {
+  headingTag?: "h1" | "h2";
+}
+
+const { headingTag = "h2" } = Astro.props;
+const HeadingTag = headingTag;
+---
+
+<section class="how-to">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Proses Sewa</p>
+      <HeadingTag>Cara Sewa</HeadingTag>
+      <p>Proses peminjaman cepat dan transparan.</p>
+    </div>
+
+    <ol class="how-to__steps">
+      {howToSteps.map((step) => (
+        <li class="how-to__step">
+          <span class="how-to__number">{step.number}</span>
+          <h3>{step.title}</h3>
+          <p>{step.description}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .how-to__steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    counter-reset: step;
+  }
+
+  .how-to__step {
+    position: relative;
+    padding: 1.9rem 1.6rem 1.7rem;
+    background: var(--color-card);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+  }
+
+  .how-to__step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 2.4rem;
+    right: -1.1rem;
+    width: 1.5rem;
+    height: 1px;
+    background: var(--color-line-strong);
+  }
+
+  .how-to__number {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--color-brass);
+  }
+
+  .how-to__step h3 {
+    margin-top: 0.85rem;
+    font-size: 1.15rem;
+  }
+
+  .how-to__step p {
+    margin-top: 0.6rem;
+    font-size: 0.94rem;
+    color: var(--color-ink-soft);
+  }
+
+  @media (max-width: 940px) {
+    .how-to__steps {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .how-to__step:nth-child(2)::after {
+      display: none;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .how-to__steps {
+      grid-template-columns: 1fr;
+    }
+    .how-to__step::after {
+      display: none;
+    }
+  }
+</style>

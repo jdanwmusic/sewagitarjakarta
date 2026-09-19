@@ -1,0 +1,145 @@
+---
+import type { Guitar } from "../data/guitars";
+import { waLinkForGuitar } from "../data/guitars";
+import GuitarImage from "./GuitarImage.astro";
+
+interface Props {
+  guitar: Guitar;
+  headingLevel?: "h2" | "h3";
+}
+
+const { guitar, headingLevel = "h3" } = Astro.props;
+const Heading = headingLevel;
+---
+
+<article class="product-card">
+  <a href={`/gitar/${guitar.slug}`} class="product-card__media" aria-label={`Lihat detail ${guitar.name}`}>
+    <GuitarImage src={guitar.image} alt={`Foto ${guitar.name} — sewa gitar ${guitar.category.toLowerCase()} SEWAGITAR.COM`} />
+    {!guitar.available && <span class="product-card__unavailable">Tidak Tersedia</span>}
+  </a>
+
+  <div class="product-card__body">
+    <div class="product-card__top">
+      <span class="tag">{guitar.category}</span>
+      <span class:list={["status-dot", { "is-unavailable": !guitar.available }]}>
+        {guitar.available ? "Tersedia" : "Tanyakan"}
+      </span>
+    </div>
+
+    <Heading class="product-card__name">
+      <a href={`/gitar/${guitar.slug}`}>{guitar.name}</a>
+    </Heading>
+
+    <p class="product-card__desc">{guitar.description}</p>
+
+    <div class="product-card__footer">
+      <p class="product-card__price">
+        {guitar.price}<span>/24 jam</span>
+      </p>
+      <a
+        class="btn btn-whatsapp product-card__cta"
+        href={waLinkForGuitar(guitar)}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        WhatsApp
+      </a>
+    </div>
+  </div>
+</article>
+
+<style>
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-card);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    height: 100%;
+  }
+
+  .product-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+    border-color: var(--color-line-strong);
+  }
+
+  .product-card__media {
+    position: relative;
+    display: block;
+    aspect-ratio: 1 / 1;
+    background: var(--color-paper-dim);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .product-card__unavailable {
+    position: absolute;
+    top: 0.9rem;
+    left: 0.9rem;
+    background: var(--color-ink);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+  }
+
+  .product-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 1.25rem 1.35rem 1.5rem;
+    flex: 1;
+  }
+
+  .product-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .product-card__name {
+    font-size: 1.2rem;
+  }
+
+  .product-card__name a:hover {
+    color: var(--color-rosewood);
+  }
+
+  .product-card__desc {
+    font-size: 0.92rem;
+    color: var(--color-ink-soft);
+    flex: 1;
+  }
+
+  .product-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 0.4rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .product-card__price {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--color-ink);
+  }
+
+  .product-card__price span {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--color-ink-soft);
+    font-weight: 500;
+  }
+
+  .product-card__cta {
+    padding: 0.55rem 1.05rem;
+    font-size: 0.85rem;
+  }
+</style>

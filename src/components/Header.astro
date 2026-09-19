@@ -1,0 +1,192 @@
+---
+import { waGeneral } from "../data/site";
+
+const navItems = [
+  { label: "Home", href: "/" },
+  { label: "Katalog", href: "/gitar" },
+  { label: "Cara Sewa", href: "/cara-sewa" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Kontak", href: "/#kontak" },
+];
+---
+
+<header class="site-header" id="site-header">
+  <div class="container site-header__bar">
+    <a href="/" class="brand">
+      SEWAGITAR<span class="brand__dot">.com</span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Navigasi utama">
+      <ul>
+        {navItems.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <a class="btn btn-primary nav-cta" href={waGeneral} target="_blank" rel="noopener noreferrer">
+        Sewa Sekarang
+      </a>
+      <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="visually-hidden">Buka menu</span>
+        <span class="menu-toggle__bar"></span>
+        <span class="menu-toggle__bar"></span>
+        <span class="menu-toggle__bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <nav aria-label="Navigasi mobile">
+      <ul>
+        {navItems.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+        <li>
+          <a class="btn btn-primary btn-block" href={waGeneral} target="_blank" rel="noopener noreferrer">
+            Sewa Sekarang
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(248, 245, 239, 0.92);
+    backdrop-filter: saturate(160%) blur(10px);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .site-header__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 76px;
+  }
+
+  .brand {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.35rem;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+  }
+
+  .brand__dot {
+    color: var(--color-rosewood);
+  }
+
+  .nav-desktop ul {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav-desktop a {
+    font-weight: 600;
+    font-size: 0.96rem;
+    color: var(--color-ink-soft);
+    transition: color 0.15s ease;
+  }
+
+  .nav-desktop a:hover {
+    color: var(--color-rosewood);
+  }
+
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+  }
+
+  .nav-cta {
+    padding: 0.65rem 1.3rem;
+    font-size: 0.9rem;
+  }
+
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--color-line-strong);
+    border-radius: var(--radius-sm);
+    background: var(--color-card);
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .menu-toggle__bar {
+    display: block;
+    width: 18px;
+    height: 2px;
+    margin-inline: auto;
+    background: var(--color-ink);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .menu-toggle[aria-expanded="true"] .menu-toggle__bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .menu-toggle[aria-expanded="true"] .menu-toggle__bar:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle[aria-expanded="true"] .menu-toggle__bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .mobile-menu {
+    border-top: 1px solid var(--color-line);
+    background: var(--color-paper);
+  }
+
+  .mobile-menu ul {
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem clamp(1.25rem, 4vw, 2.5rem) 1.75rem;
+    gap: 1.1rem;
+  }
+
+  .mobile-menu a {
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--color-ink);
+    display: block;
+  }
+
+  @media (max-width: 880px) {
+    .nav-desktop,
+    .nav-cta {
+      display: none;
+    }
+    .menu-toggle {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+
+  toggle?.addEventListener("click", () => {
+    const expanded = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!expanded));
+    if (menu) menu.hidden = expanded;
+  });
+
+  // Close mobile menu when a link inside it is clicked
+  menu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      toggle?.setAttribute("aria-expanded", "false");
+      if (menu) menu.hidden = true;
+    });
+  });
+</script>

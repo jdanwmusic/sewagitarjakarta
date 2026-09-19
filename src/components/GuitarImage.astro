@@ -1,0 +1,92 @@
+---
+// Menampilkan foto gitar dari /public/images/guitars/.
+// Jika file foto belum ada, tampilkan placeholder rapi (bukan ikon patah)
+// supaya halaman tetap terlihat profesional sebelum foto asli dipasang.
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  loading?: "eager" | "lazy";
+  fetchpriority?: "high" | "low" | "auto";
+  sizes?: string;
+}
+
+const {
+  src,
+  alt,
+  class: className = "",
+  loading = "lazy",
+  fetchpriority = "auto",
+  sizes,
+} = Astro.props;
+
+const imgPath = `/images/guitars/${src}`;
+---
+
+<span class={`guitar-image ${className}`}>
+  <img
+    src={imgPath}
+    alt={alt}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    sizes={sizes}
+    decoding="async"
+    onerror="this.closest('.guitar-image')?.classList.add('guitar-image--fallback'); this.style.display='none';"
+  />
+  <span class="guitar-image__fallback" aria-hidden="true">
+    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M22 40c6.6 0 12-5.4 12-12s-5.4-12-12-12-12 5.4-12 12 5.4 12 12 12Z"
+        stroke="currentColor" stroke-width="2"
+      />
+      <path d="M30 30 46 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M40 12l6 6M44 8l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <circle cx="22" cy="28" r="4" stroke="currentColor" stroke-width="1.6" />
+    </svg>
+    <span class="guitar-image__fallback-text">Foto segera hadir</span>
+  </span>
+</span>
+
+<style>
+  .guitar-image {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, var(--color-paper-dim), var(--color-brass-tint));
+  }
+
+  .guitar-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .guitar-image__fallback {
+    display: none;
+    position: absolute;
+    inset: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    color: var(--color-brass);
+  }
+
+  .guitar-image__fallback svg {
+    width: 25%;
+    height: auto;
+    min-width: 48px;
+  }
+
+  .guitar-image__fallback-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-ink-soft);
+  }
+
+  .guitar-image--fallback .guitar-image__fallback {
+    display: flex;
+  }
+</style>

@@ -1,0 +1,87 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import TrustStats from "../components/TrustStats.astro";
+import ProductGrid from "../components/ProductGrid.astro";
+import PricingSection from "../components/PricingSection.astro";
+import HowToRent from "../components/HowToRent.astro";
+import AreaService from "../components/AreaService.astro";
+import FinalCTA from "../components/FinalCTA.astro";
+import { guitars } from "../data/guitars";
+import { siteConfig } from "../data/site";
+
+const title = "Sewa Gitar Jakarta & Tangerang | SEWAGITAR.COM";
+const description =
+  "Sewa gitar elektrik, akustik, dan bass siap pakai untuk rekaman, latihan, dan panggung. Melayani Jakarta & Tangerang. Hubungi SEWAGITAR.COM via WhatsApp.";
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: siteConfig.name,
+  image: `${siteConfig.url}/images/guitars/parker-pm10.jpg`,
+  url: siteConfig.url,
+  telephone: "+62-877-4851-4337",
+  email: siteConfig.email,
+  priceRange: "Rp 100.000 - Rp 1.000.000",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Jl. Semanan Pintu Air No. 37, Duri Kosambi",
+    addressLocality: "Cengkareng, Jakarta Barat",
+    addressRegion: "DKI Jakarta",
+    addressCountry: "ID",
+  },
+  areaServed: ["Jakarta", "Tangerang"],
+};
+---
+
+<Layout
+  title={title}
+  description={description}
+  path="/"
+  ogImage="/images/guitars/parker-pm10.jpg"
+  structuredData={localBusinessSchema}
+>
+  <Hero />
+  <TrustStats />
+
+  <section class="section" id="katalog">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Katalog</p>
+        <h2>Pilihan Instrumen</h2>
+        <p>
+          Tersedia 3 kategori instrumen berkualitas, terawat rutin, dan siap
+          pakai untuk berbagai kebutuhan musik.
+        </p>
+      </div>
+
+      <ProductGrid guitars={guitars} headingLevel="h3" />
+
+      <div class="see-all">
+        <a href="/gitar" class="see-all__link">Lihat Semua Pilihan Gitar →</a>
+      </div>
+    </div>
+  </section>
+
+  <PricingSection />
+  <HowToRent />
+  <AreaService />
+  <FinalCTA />
+</Layout>
+
+<style>
+  .see-all {
+    margin-top: 2.5rem;
+    text-align: center;
+  }
+
+  .see-all__link {
+    font-weight: 700;
+    font-size: 1.02rem;
+    color: var(--color-rosewood);
+  }
+
+  .see-all__link:hover {
+    color: var(--color-rosewood-dark);
+  }
+</style>

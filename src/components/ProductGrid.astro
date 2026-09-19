@@ -1,0 +1,46 @@
+---
+import type { Guitar } from "../data/guitars";
+import ProductCard from "./ProductCard.astro";
+
+interface Props {
+  guitars: Guitar[];
+  headingLevel?: "h2" | "h3";
+}
+
+const { guitars, headingLevel = "h3" } = Astro.props;
+---
+
+{guitars.length > 0 ? (
+  <div class="product-grid">
+    {guitars.map((guitar) => (
+      <ProductCard guitar={guitar} headingLevel={headingLevel} />
+    ))}
+  </div>
+) : (
+  <p class="product-grid__empty">Belum ada gitar pada kategori ini. Silakan tanyakan ketersediaan via WhatsApp.</p>
+)}
+
+<style>
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .product-grid__empty {
+    color: var(--color-ink-soft);
+    padding: 2rem 0;
+  }
+
+  @media (max-width: 940px) {
+    .product-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .product-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
