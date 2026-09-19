@@ -1,0 +1,40 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ProductDetail from "../../components/ProductDetail.astro";
+import { getGuitarBySlug } from "../../data/guitars";
+import { siteConfig } from "../../data/site";
+
+const guitar = getGuitarBySlug("gitar-elektrik")!;
+
+const title = "Sewa Gitar Elektrik Jakarta & Tangerang | SEWAGITAR.COM";
+const description =
+  "Sewa gitar elektrik siap pakai Rp100.000/24 jam untuk rekaman, panggung, dan latihan band. Melayani Jakarta & Tangerang.";
+
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: guitar.name,
+  image: `${siteConfig.url}/images/guitars/${guitar.image}`,
+  description: guitar.description,
+  category: guitar.category,
+  offers: {
+    "@type": "Offer",
+    priceCurrency: "IDR",
+    price: "100000",
+    availability: guitar.available
+      ? "https://schema.org/InStock"
+      : "https://schema.org/LimitedAvailability",
+    url: `${siteConfig.url}/gitar/${guitar.slug}`,
+  },
+};
+---
+
+<Layout
+  title={title}
+  description={description}
+  path={`/gitar/${guitar.slug}`}
+  ogImage={`/images/guitars/${guitar.image}`}
+  structuredData={productSchema}
+>
+  <ProductDetail guitar={guitar} />
+</Layout>

@@ -1,0 +1,228 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ProductCard from "../../components/ProductCard.astro";
+import { guitars, categories } from "../../data/guitars";
+
+const title = "Katalog Gitar Sewa — Elektrik, Akustik & Bass | SEWAGITAR.COM";
+const description =
+  "Jelajahi katalog lengkap gitar elektrik, akustik, dan bass yang siap disewa untuk area Jakarta dan Tangerang. Harga flat Rp100.000/24 jam.";
+
+const initialCategory = (Astro.url.searchParams.get("kategori") ?? "Semua") as string;
+const validInitial = categories.includes(initialCategory as any) ? initialCategory : "Semua";
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: guitars.map((g, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    url: `https://sewagitar.com/gitar/${g.slug}`,
+    name: g.name,
+  })),
+};
+---
+
+<Layout
+  title={title}
+  description={description}
+  path="/gitar"
+  structuredData={itemListSchema}
+>
+  <section class="catalog-hero">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Katalog</p>
+        <h1>Katalog Gitar</h1>
+        <p>
+          Temukan instrumen yang sesuai untuk kebutuhan latihan, rekaman,
+          maupun panggung.
+        </p>
+      </div>
+
+      <div class="catalog-controls">
+        <label class="catalog-search">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <circle cx="9" cy="9" r="6.2" stroke="currentColor" stroke-width="1.6"/>
+            <path d="m17 17-3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <input
+            type="search"
+            id="catalog-search-input"
+            placeholder="Cari nama gitar…"
+            aria-label="Cari gitar berdasarkan nama"
+          />
+        </label>
+
+        <div class="catalog-filters" role="group" aria-label="Filter kategori gitar">
+          <button type="button" class="catalog-filter is-active" data-filter="Semua">Semua</button>
+          {categories.map((cat) => (
+            <button type="button" class="catalog-filter" data-filter={cat} data-initial-active={cat === validInitial ? "true" : undefined}>
+              {cat}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <div class="product-grid" id="catalog-grid">
+        {guitars.map((guitar) => (
+          <div class="catalog-item" data-name={guitar.name.toLowerCase()} data-category={guitar.category}>
+            <ProductCard guitar={guitar} headingLevel="h2" />
+          </div>
+        ))}
+      </div>
+      <p class="catalog-empty" id="catalog-empty" hidden>
+        Tidak ada gitar yang cocok dengan pencarian Anda. Coba kata kunci lain atau tanyakan langsung via WhatsApp.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .catalog-hero {
+    padding-block: clamp(2.5rem, 5vw, 4rem) 0;
+  }
+
+  .catalog-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: clamp(2rem, 4vw, 2.75rem);
+  }
+
+  .catalog-search {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--color-card);
+    border: 1px solid var(--color-line-strong);
+    border-radius: 999px;
+    padding: 0.7rem 1.1rem;
+    flex: 1;
+    min-width: 220px;
+    max-width: 340px;
+  }
+
+  .catalog-search svg {
+    width: 18px;
+    height: 18px;
+    color: var(--color-ink-soft);
+    flex-shrink: 0;
+  }
+
+  .catalog-search input {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.95rem;
+    width: 100%;
+    color: var(--color-ink);
+  }
+
+  .catalog-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .catalog-filter {
+    border: 1px solid var(--color-line-strong);
+    background: var(--color-card);
+    color: var(--color-ink-soft);
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .catalog-filter:hover {
+    border-color: var(--color-rosewood);
+  }
+
+  .catalog-filter.is-active {
+    background: var(--color-rosewood);
+    border-color: var(--color-rosewood);
+    color: #fff8f2;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .catalog-empty {
+    text-align: center;
+    color: var(--color-ink-soft);
+    padding: 3rem 0;
+  }
+
+  @media (max-width: 940px) {
+    .product-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .product-grid {
+      grid-template-columns: 1fr;
+    }
+    .catalog-controls {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .catalog-search {
+      max-width: none;
+    }
+  }
+</style>
+
+<script>
+  const searchInput = document.getElementById("catalog-search-input") as HTMLInputElement | null;
+  const filterButtons = Array.from(document.querySelectorAll<HTMLButtonElement>(".catalog-filter"));
+  const items = Array.from(document.querySelectorAll<HTMLElement>(".catalog-item"));
+  const emptyState = document.getElementById("catalog-empty");
+
+  let activeCategory = "Semua";
+  const preset = filterButtons.find((b) => b.dataset.initialActive === "true");
+  if (preset) {
+    activeCategory = preset.dataset.filter ?? "Semua";
+    filterButtons.forEach((b) => b.classList.toggle("is-active", b === preset));
+  }
+
+  function applyFilters() {
+    const query = (searchInput?.value ?? "").trim().toLowerCase();
+    let visibleCount = 0;
+
+    items.forEach((item) => {
+      const matchesCategory = activeCategory === "Semua" || item.dataset.category === activeCategory;
+      const matchesQuery = !query || item.dataset.name?.includes(query);
+      const visible = matchesCategory && matchesQuery;
+      item.style.display = visible ? "" : "none";
+      if (visible) visibleCount++;
+    });
+
+    if (emptyState) emptyState.hidden = visibleCount !== 0;
+  }
+
+  filterButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      activeCategory = btn.dataset.filter ?? "Semua";
+      filterButtons.forEach((b) => b.classList.toggle("is-active", b === btn));
+      applyFilters();
+    });
+  });
+
+  searchInput?.addEventListener("input", applyFilters);
+
+  applyFilters();
+</script>

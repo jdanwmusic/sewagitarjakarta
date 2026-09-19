@@ -1,0 +1,64 @@
+---
+const stats = [
+  { value: "3+", label: "Kategori Instrumen" },
+  { value: "Jabodetabek", label: "Area Layanan" },
+  { value: "Same-day", label: "Pengiriman" },
+];
+---
+
+<section class="trust-stats">
+  <div class="container trust-stats__row">
+    {stats.map((stat, i) => (
+      <>
+        <div class="trust-stats__item">
+          <p class="trust-stats__value">{stat.value}</p>
+          <p class="trust-stats__label">{stat.label}</p>
+        </div>
+        {i < stats.length - 1 && <span class="trust-stats__divider" aria-hidden="true"></span>}
+      </>
+    ))}
+  </div>
+</section>
+
+<style>
+  .trust-stats {
+    border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .trust-stats__row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1.5rem, 5vw, 4rem);
+    padding-block: clamp(1.75rem, 3vw, 2.25rem);
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  .trust-stats__value {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+    font-weight: 600;
+    color: var(--color-rosewood);
+  }
+
+  .trust-stats__label {
+    margin-top: 0.2rem;
+    font-size: 0.9rem;
+    color: var(--color-ink-soft);
+    font-weight: 500;
+  }
+
+  .trust-stats__divider {
+    width: 1px;
+    height: 36px;
+    background: var(--color-line-strong);
+  }
+
+  @media (max-width: 560px) {
+    .trust-stats__divider {
+      display: none;
+    }
+  }
+</style>

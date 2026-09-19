@@ -1,0 +1,88 @@
+---
+import { faqItems } from "../data/site";
+
+interface Props {
+  headingTag?: "h1" | "h2";
+  showHeading?: boolean;
+}
+
+const { headingTag = "h2", showHeading = true } = Astro.props;
+const HeadingTag = headingTag;
+---
+
+<section class="faq">
+  <div class="container">
+    {showHeading && (
+      <div class="section-head">
+        <p class="eyebrow">Pertanyaan Umum</p>
+        <HeadingTag>FAQ</HeadingTag>
+        <p>Jawaban singkat seputar sewa gitar di SEWAGITAR.COM.</p>
+      </div>
+    )}
+
+    <div class="faq__list">
+      {faqItems.map((item, i) => (
+        <details class="faq__item" name="faq-group">
+          <summary>
+            <span>{item.question}</span>
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M5 7.5 10 12.5 15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </summary>
+          <p>{item.answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    max-width: 760px;
+  }
+
+  .faq__item {
+    background: var(--color-card);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: 0.3rem 1.4rem;
+  }
+
+  .faq__item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1.1rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    list-style: none;
+  }
+
+  .faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__item summary svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--color-rosewood);
+    transition: transform 0.2s ease;
+  }
+
+  .faq__item[open] summary svg {
+    transform: rotate(180deg);
+  }
+
+  .faq__item p {
+    padding-bottom: 1.2rem;
+    color: var(--color-ink-soft);
+    font-size: 0.96rem;
+    max-width: 62ch;
+  }
+</style>

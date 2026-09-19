@@ -1,0 +1,121 @@
+---
+import { siteConfig, waArea } from "../data/site";
+---
+
+<section class="area">
+  <div class="container area__grid">
+    <div class="area__copy">
+      <p class="eyebrow">Jangkauan Layanan</p>
+      <h2>Melayani Jakarta &amp; Tangerang</h2>
+      <p class="area__desc">
+        Pengantaran untuk area Jabodetabek. Pengambilan langsung di workshop
+        Duri Kosambi, Cengkareng, Jakarta Barat.
+      </p>
+
+      <div class="area__workshop">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 21s-7-6.2-7-11.4A7 7 0 0 1 19 9.6C19 14.8 12 21 12 21Z" stroke="currentColor" stroke-width="1.6"/>
+          <circle cx="12" cy="9.6" r="2.6" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+        <div>
+          <p class="area__workshop-label">Workshop</p>
+          <p class="area__workshop-address">{siteConfig.address.full}</p>
+        </div>
+      </div>
+
+      <div class="area__actions">
+        <a class="btn btn-whatsapp" href={waArea} target="_blank" rel="noopener noreferrer">
+          Tanyakan Area Pengantaran
+        </a>
+        <a class="btn btn-outline" href={siteConfig.mapsUrl} target="_blank" rel="noopener noreferrer">
+          Buka di Google Maps
+        </a>
+      </div>
+    </div>
+
+    <div class="area__map">
+      <iframe
+        title="Lokasi workshop SEWAGITAR.COM di Duri Kosambi, Cengkareng, Jakarta Barat"
+        src={`https://www.google.com/maps?q=${encodeURIComponent(siteConfig.address.full)}&output=embed`}
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<style>
+  .area__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .area__desc {
+    margin-top: 1.1rem;
+    color: var(--color-ink-soft);
+    font-size: 1.05rem;
+    max-width: 46ch;
+  }
+
+  .area__workshop {
+    margin-top: 1.75rem;
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+    padding: 1.1rem 1.3rem;
+    background: var(--color-card);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+  }
+
+  .area__workshop svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    color: var(--color-rosewood);
+    margin-top: 0.1rem;
+  }
+
+  .area__workshop-label {
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  .area__workshop-address {
+    margin-top: 0.25rem;
+    color: var(--color-ink-soft);
+    font-size: 0.92rem;
+  }
+
+  .area__actions {
+    margin-top: 1.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+  }
+
+  .area__map {
+    aspect-ratio: 4 / 3.2;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    box-shadow: var(--shadow-md);
+  }
+
+  .area__map iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  @media (max-width: 940px) {
+    .area__grid {
+      grid-template-columns: 1fr;
+    }
+    .area__map {
+      order: -1;
+    }
+  }
+</style>

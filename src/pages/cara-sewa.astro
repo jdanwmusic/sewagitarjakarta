@@ -1,0 +1,91 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HowToRent from "../components/HowToRent.astro";
+import AreaService from "../components/AreaService.astro";
+import FinalCTA from "../components/FinalCTA.astro";
+import { howToSteps } from "../data/site";
+import { siteConfig } from "../data/site";
+
+const title = "Cara Sewa Gitar — Proses Cepat & Transparan | SEWAGITAR.COM";
+const description =
+  "Panduan langkah demi langkah menyewa gitar di SEWAGITAR.COM: pilih instrumen, hubungi via WhatsApp, bayar deposit, lalu terima atau ambil gitar.";
+
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name: "Cara Sewa Gitar di SEWAGITAR.COM",
+  step: howToSteps.map((step) => ({
+    "@type": "HowToStep",
+    name: step.title,
+    text: step.description,
+  })),
+};
+---
+
+<Layout
+  title={title}
+  description={description}
+  path="/cara-sewa"
+  structuredData={howToSchema}
+>
+  <HowToRent headingTag="h1" />
+
+  <section class="section section--muted">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Detail Penting</p>
+        <h2>Yang Perlu Anda Siapkan</h2>
+        <p>Beberapa hal ini akan mempercepat proses konfirmasi sewa Anda.</p>
+      </div>
+
+      <div class="prep-grid">
+        <div class="prep-card">
+          <h3>Deposit</h3>
+          <p>DP 50% dari total biaya sewa, dibayarkan via transfer bank atau e-wallet untuk konfirmasi pemesanan.</p>
+        </div>
+        <div class="prep-card">
+          <h3>Durasi Sewa</h3>
+          <p>Informasikan durasi yang dibutuhkan — harian (24 jam), mingguan, atau bulanan — saat menghubungi via WhatsApp.</p>
+        </div>
+        <div class="prep-card">
+          <h3>Pengiriman atau Ambil Sendiri</h3>
+          <p>Gitar dapat dikirim ke area Jabodetabek, atau diambil langsung di workshop kami di {siteConfig.address.full}.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <AreaService />
+  <FinalCTA />
+</Layout>
+
+<style>
+  .prep-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .prep-card {
+    background: var(--color-card);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem 1.6rem;
+  }
+
+  .prep-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .prep-card p {
+    margin-top: 0.7rem;
+    color: var(--color-ink-soft);
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 860px) {
+    .prep-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,48 @@
+---
+import Layout from "../layouts/Layout.astro";
+import FAQ from "../components/FAQ.astro";
+import FinalCTA from "../components/FinalCTA.astro";
+import { faqItems } from "../data/site";
+
+const title = "FAQ — Pertanyaan Seputar Sewa Gitar | SEWAGITAR.COM";
+const description =
+  "Jawaban lengkap seputar harga sewa, deposit, pengiriman, area layanan, dan cara menyewa gitar elektrik, akustik, dan bass di SEWAGITAR.COM.";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
+---
+
+<Layout
+  title={title}
+  description={description}
+  path="/faq"
+  structuredData={faqSchema}
+>
+  <div class="faq-page-head">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Bantuan</p>
+        <h1>Pertanyaan yang Sering Diajukan</h1>
+        <p>Semua yang perlu Anda ketahui sebelum menyewa gitar di SEWAGITAR.COM.</p>
+      </div>
+    </div>
+  </div>
+  <FAQ showHeading={false} />
+  <FinalCTA />
+</Layout>
+
+<style>
+  .faq-page-head {
+    padding-top: clamp(2.5rem, 5vw, 4rem);
+  }
+</style>
