@@ -10,7 +10,7 @@ const { headingTag = "h2", showHeading = true } = Astro.props;
 const HeadingTag = headingTag;
 ---
 
-<section class="faq">
+<section class="faq section">
   <div class="container">
     {showHeading && (
       <div class="section-head">
@@ -21,7 +21,7 @@ const HeadingTag = headingTag;
     )}
 
     <div class="faq__list">
-      {faqItems.map((item, i) => (
+      {faqItems.map((item) => (
         <details class="faq__item" name="faq-group">
           <summary>
             <span>{item.question}</span>
