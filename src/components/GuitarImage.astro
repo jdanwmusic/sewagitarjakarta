@@ -21,18 +21,26 @@ const {
 } = Astro.props;
 
 const imgPath = `/images/guitars/${src}`;
+const webpPath = `/images/guitars/${src.replace(/\.(jpg|jpeg)$/i, '.webp')}`;
 ---
 
 <span class={`guitar-image ${className}`}>
-  <img
-    src={imgPath}
-    alt={alt}
-    loading={loading}
-    fetchpriority={fetchpriority}
-    sizes={sizes}
-    decoding="async"
-    onerror="this.closest('.guitar-image')?.classList.add('guitar-image--fallback'); this.style.display='none';"
-  />
+  <picture>
+    <source
+      type="image/webp"
+      srcset={webpPath}
+      sizes={sizes}
+    />
+    <img
+      src={imgPath}
+      alt={alt}
+      loading={loading}
+      fetchpriority={fetchpriority}
+      sizes={sizes}
+      decoding="async"
+      onerror="this.closest('.guitar-image')?.classList.add('guitar-image--fallback'); this.style.display='none';"
+    />
+  </picture>
   <span class="guitar-image__fallback" aria-hidden="true">
     <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -56,11 +64,18 @@ const imgPath = `/images/guitars/${src}`;
     background: linear-gradient(160deg, var(--color-paper-dim), var(--color-brass-tint));
   }
 
+  .guitar-image picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
   .guitar-image img {
     width: 100%;
     height: 100%;
     object-fit: contain;
     object-position: center;
+    display: block;
   }
 
   .guitar-image__fallback {
