@@ -36,6 +36,7 @@ const related = guitars
           alt={`Foto ${guitar.name} — sewa gitar ${guitar.category.toLowerCase()} SEWA GITAR JAKARTA area Jakarta dan Tangerang`}
           loading="eager"
           fetchpriority="high"
+          sizes="(max-width: 860px) 100vw, 50vw"
         />
         {!guitar.available && <span class="product-detail__unavailable">Tidak Tersedia</span>}
       </div>
