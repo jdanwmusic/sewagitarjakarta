@@ -1,5 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#6F3324"/>
-  <path d="M32 10c9 0 16.5 6 18.6 14.4 2 8-1.4 15.9-9.8 24.4-2 2-4.8 4.4-6.6 5.9a2.7 2.7 0 0 1-3.4 0c-1.8-1.5-4.6-3.9-6.6-5.9-8.4-8.5-11.8-16.4-9.8-24.4C15.5 16 23 10 32 10Z" fill="#F8F5EF"/>
-  <circle cx="32" cy="27" r="5.6" fill="#6F3324"/>
+  <rect width="64" height="64" rx="12" fill="#6F3324"/>
+  <!-- Gitar akustik disederhanakan -->
+  <path d="M18 48c0-13 4-24 14-28 2-1 4-1 6 0 10 4 14 15 14 28 0 3-1 5-3 6l-22 2c-2-1-3-3-3-6z" fill="#F8F5EF"/>
+  <circle cx="32" cy="26" r="3.5" fill="#6F3324"/>
+  <!-- monogram S kecil -->
+  <text x="24" y="44" font-family="Georgia,serif" font-size="8" font-weight="bold" fill="#6F3324">S</text>
 </svg>
